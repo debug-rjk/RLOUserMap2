@@ -20,7 +20,7 @@
 
     <script>
       let map;
-      const bounds = new google.maps.LatLngBounds();
+      //const bounds = new google.maps.LatLngBounds();
 
       function createMarker(location, title, iconUrl, address) {
         const marker = new google.maps.Marker({
@@ -44,9 +44,9 @@
         geocoder.geocode({ address }, (results, status) => {
           if (status === 'OK') {
             const location = results[0].geometry.location;
-            bounds.extend(location);
+            //bounds.extend(location);
             createMarker(location, title, iconUrl, address);
-            map.fitBounds(bounds);
+            //map.fitBounds(bounds);
           } else {
             console.warn(`주소 변환 실패: ${address} (${status})`);
           }
