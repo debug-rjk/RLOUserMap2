@@ -20,29 +20,11 @@
   <body>
     <div id="map"></div>
     <script>
-function geocodeAddress(geocoder, map, address, runData) {
+function geocodeAddress(geocoder, map, address) {
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === 'OK') {
       // 주소 변환에 성공하면, 해당 위치로 지도의 중심을 이동
       map.setCenter(results[0].geometry.location);
-
-      // 정보창 내용 (HTML)
-      const contentString = `
-        <div id="content">
-          <h1 id="firstHeading" class="firstHeading">러닝 기록</h1>
-          <div id="bodyContent">
-            <p><b>거리:</b> ${runData.distance}</p>
-            <p><b>시간:</b> ${runData.time}</p>
-            <p><b>페이스:</b> ${runData.pace}</p>
-            <p><b>칼로리:</b> ${runData.calories}</p>
-          </div>
-        </div>
-      `;
-
-      // 정보창 생성
-      const infowindow = new google.maps.InfoWindow({
-        content: contentString,
-      });
 
       // 마커 생성
 const marker = new google.maps.Marker({
@@ -75,14 +57,10 @@ function initMap() {
   // 러닝 데이터와 도시 이름 정의
   const runData = {
     city: "고양시 덕양구 지축로 55", // 위치를 도시 이름으로 입력
-    distance: "10.13 km",
-    time: "56:06",
-    pace: "5:32 /km",
-    calories: "650 kcal"
   };
 
   // 도시 이름을 좌표로 변환하고 지도에 마커를 표시
-  geocodeAddress(geocoder, map, runData.city, runData);
+  geocodeAddress(geocoder, map, runData.city);
 }
     </script>
     
