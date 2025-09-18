@@ -1,17 +1,12 @@
 [
   {
     "city": "고양시 덕양구 지축로 55",
-    "title": "자유/주3회 8km",
+    "title": "자유",
     "icon": "https://i.imgur.com/d9YJOeh.png"
-  },
-  {
+  }
+  ,{
     "city": "서울특별시 마포구 월드컵북로 396",
-    "title": "마포 러너/주2회 5km",
-    "icon": "https://i.imgur.com/abc123.png"
-  },
-  {
-    "city": "성남시 분당구 판교역로 146",
-    "title": "판교 러너/주5회 10km",
-    "icon": "https://i.imgur.com/xyz789.png"
+    "title": "거북이",
+    "icon": "https://imgur.com/AeDXmF2.png"
   }
 ]
