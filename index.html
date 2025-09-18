@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>러닝 기록 지도</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* 지도가 표시될 영역의 스타일을 지정합니다. */
+      #map {
+        height: 100%;
+      }
+      /* HTML과 body의 높이를 100%로 설정하여 지도가 화면 전체를 채우도록 합니다. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+function geocodeAddress(geocoder, map, address, runData) {
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+      // 주소 변환에 성공하면, 해당 위치로 지도의 중심을 이동
+      map.setCenter(results[0].geometry.location);
+
+      // 정보창 내용 (HTML)
+      const contentString = `
+        <div id="content">
+          <h1 id="firstHeading" class="firstHeading">러닝 기록</h1>
+          <div id="bodyContent">
+            <p><b>거리:</b> ${runData.distance}</p>
+            <p><b>시간:</b> ${runData.time}</p>
+            <p><b>페이스:</b> ${runData.pace}</p>
+            <p><b>칼로리:</b> ${runData.calories}</p>
+          </div>
+        </div>
+      `;
+
+      // 정보창 생성
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+
+      // 마커 생성
+const marker = new google.maps.Marker({
+  map: map,
+  position: results[0].geometry.location,
+  icon: 'https://i.imgur.com/d9YJOeh.png',
+  title: "자유/주3회 8km", // 마우스 오버 시 표시될 텍스트 (선택 사항)
+});
+
+      // 마커 클릭 시 정보창 열기 이벤트 리스너 추가
+      marker.addListener("click", () => {
+        infowindow.open({
+          anchor: marker,
+          map,
+        });
+      });
+    } else {
+      alert('Geocode failed: ' + status);
+    }
+  });
+}
+
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+  });
+
+  const geocoder = new google.maps.Geocoder();
+
+  // 러닝 데이터와 도시 이름 정의
+  const runData = {
+    city: "서울시 강동구", // 위치를 도시 이름으로 입력
+    distance: "10.13 km",
+    time: "56:06",
+    pace: "5:32 /km",
+    calories: "650 kcal"
+  };
+
+  // 도시 이름을 좌표로 변환하고 지도에 마커를 표시
+  geocodeAddress(geocoder, map, runData.city, runData);
+}
+    </script>
+    
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyPEBxM98Jhqx5bfF7N07W08jsOpzPmU&libraries=places&callback=initMap">
+    </script>
+  </body>
+</html>
