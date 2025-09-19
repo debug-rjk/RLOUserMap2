@@ -60,9 +60,8 @@
         });
 
         const geocoder = new google.maps.Geocoder();
-        const oms = new OverlappingMarkerSpiderfier(map);
-        //const oms = new OverlappingMarkerSpiderfier.gmaps(map);
-
+        const oms = new OverlappingMarkerSpiderfier(map); // 이 부분은 그대로 사용 가능합니다.
+        
         fetch('RLOMap250919.json')
           .then(response => response.json())
           .then(runDataList => {
@@ -90,8 +89,6 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyPEBxM98Jhqx5bfF7N07W08jsOpzPmU&libraries=places&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/@googlemaps/markerclusterer/dist/index.min.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/overlapping-marker-spiderfier@2.0.3/dist/oms.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/overlapping-marker-spiderfier@1.0.3/lib/oms.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/overlapping-marker-spiderfier@2.0.3/dist/oms.min.js"></script>
   </body>
 </html>
