@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>러닝 기록 지도</title>
+    <title>러닝 기록 지도 (OMS 적용)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <style>
@@ -18,10 +18,11 @@
   <body>
     <div id="map"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/overlapping-marker-spiderfier@2.0.3/dist/oms.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <script>
       let map;
 
-      // 마커를 생성하고 정보창을 추가하는 함수
       function createMarker(location, title, iconUrl, address) {
         const marker = new google.maps.Marker({
           position: location,
@@ -36,11 +37,10 @@
         marker.addListener("click", () => {
           infowindow.open(map, marker);
         });
-        
+
         return marker;
       }
 
-      // 주소를 위도/경도로 변환하고 마커를 반환하는 함수 (비동기)
       function geocodeAddress(geocoder, address, title, iconUrl) {
         return new Promise((resolve, reject) => {
           geocoder.geocode({ address }, (results, status) => {
@@ -56,7 +56,6 @@
         });
       }
 
-      // 지도를 초기화하고 마커를 클러스터링하는 메인 함수
       function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
           zoom: 12,
@@ -64,7 +63,8 @@
         });
 
         const geocoder = new google.maps.Geocoder();
-        
+        const oms = new OverlappingMarkerSpiderfier(map);
+
         fetch('RLOMap250919.json')
           .then(response => response.json())
           .then(runDataList => {
@@ -77,6 +77,9 @@
 
             Promise.all(geocodePromises).then(markers => {
               const validMarkers = markers.filter(marker => marker !== null);
+              validMarkers.forEach(marker => {
+                oms.addMarker(marker); // OMS에 마커 등록
+              });
               if (validMarkers.length > 0) {
                 new markerClusterer.MarkerClusterer({ markers: validMarkers, map });
               }
@@ -91,6 +94,5 @@
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyPEBxM98Jhqx5bfF7N07W08jsOpzPmU&libraries=places&callback=initMap">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@googlemaps/markerclusterer/dist/index.min.js"></script>
   </body>
 </html>
