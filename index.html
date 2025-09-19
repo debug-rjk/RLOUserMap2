@@ -21,6 +21,11 @@
 
 <body>
   <div id="map"></div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyPEBxM98Jhqx5bfF7N07W08jsOpzPmU2&libraries=places">
+  </script>
+  <script src="https://cdn.jsdelivr.net/gh/fritz-c/OverlappingMarkerSpiderfier@1.1.4/dist/oms.min.js"></script>
+  <script src='https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js'></script>
+  </script>
   <script>
     let map;
 
@@ -73,6 +78,8 @@
         keepSpiderfied: true
       });
 
+      google.maps.event.addDomListener(window, 'load', initMap);
+
       fetch('RLOMap250919.json')
         .then(response => response.json())
         .then(runDataList => {
@@ -100,13 +107,6 @@
           console.error("데이터 로딩 실패:", error);
         });
     }
-
-    google.maps.event.addDomListener(window, 'load', initMap);
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyPEBxM98Jhqx5bfF7N07W08jsOpzPmU2&libraries=places">
-  </script>
-  <script src="https://cdn.jsdelivr.net/gh/fritz-c/OverlappingMarkerSpiderfier@1.1.4/dist/oms.min.js"></script>
-  <script src='https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js'></script>
   </script>
 </body>
 
