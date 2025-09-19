@@ -74,12 +74,12 @@
       });
 
       const geocoder = new google.maps.Geocoder();
-      const oms = new OverlappingMarkerSpiderfier(map, {
-        keepSpiderfied: true
-      });
-
-      google.maps.event.addDomListener(window, 'load', initMap);
-
+      const oms = new OverlappingMarkerSpiderfier(map);
+      /*
+            const oms = new OverlappingMarkerSpiderfier(map, {
+              keepSpiderfied: true
+            });
+      */
       fetch('RLOMap250919.json')
         .then(response => response.json())
         .then(runDataList => {
@@ -107,6 +107,8 @@
           console.error("데이터 로딩 실패:", error);
         });
     }
+
+    google.maps.event.addDomListener(window, 'load', initMap);
   </script>
 </body>
 
