@@ -24,7 +24,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyPEBxM98Jhqx5bfF7N07W08jsOpzPmU&libraries=places&callback=initMap">
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/@googlemaps/markerclusterer/dist/index.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/overlapping-marker-spiderfier@1.1.4/lib/oms.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
 
   <div id="map"></div>
   <script>
@@ -75,7 +75,7 @@
       });
 
       const geocoder = new google.maps.Geocoder();
-      const oms = OverlappingMarkerSpiderfier(map);
+      const oms = new OverlappingMarkerSpiderfier(map);
 
       fetch('RLOMap250919.json')
         .then(response => response.json())
