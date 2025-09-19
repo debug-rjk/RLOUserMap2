@@ -64,7 +64,7 @@
         });
 
         const geocoder = new google.maps.Geocoder();
-        const oms = new OverlappingMarkerSpiderfier(map);
+        const oms = new window.OverlappingMarkerSpiderfier(map);
         
         fetch('RLOMap250919.json')
           .then(response => response.json())
