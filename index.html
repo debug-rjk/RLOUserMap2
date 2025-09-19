@@ -65,7 +65,9 @@
           .then(response => response.json())
           .then(runDataList => {
             runDataList.forEach(data => {
-              geocodeAddress(geocoder, data.city, data.title, data.icon);
+              if(data.city) {
+                geocodeAddress(geocoder, data.city, data.title, data.icon);
+              }
             });
           })
           .catch(error => {
