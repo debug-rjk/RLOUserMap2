@@ -4,13 +4,13 @@
     "title": "자유",
     "icon": "https://i.imgur.com/d9YJOeh.png"
   }
+  //,{
+  //  "city": "서울시",
+  //  "title": "거북이",
+  //  "icon": "https://i.imgur.com/AeDXmF2.png"
+  //}
   ,{
     "city": "서울시",
-    "title": "거북이",
-    "icon": "https://i.imgur.com/AeDXmF2.png"
-  }
-  ,{
-    "city": "부산시",
     "title": "금연러너",
     "icon": "https://i.imgur.com/EQXlDvw.png"
   }
