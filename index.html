@@ -74,13 +74,21 @@
       });
 
       const geocoder = new google.maps.Geocoder();
-      //const oms = new OverlappingMarkerSpiderfier(map);
-      ///*
+
       const oms = new OverlappingMarkerSpiderfier(map, {
-        nearbyDistance: 100,
+        markersWontMove: true,
+        markersWontHide: true,
+        basicFormatEvents: true,
+        nearbyDistance: 1000,
+        circleSpiralSwitchover: 8,
+        spiralFootSeparation: 20,
+        spiralLengthStart: 16,
+        spiralLengthFactor: 12,
+        circleFootSeparation: 50,
+        circleStartAngle: 180,
         keepSpiderfied: true,
       });
-      //*/
+
       fetch('RLOMap250919.json')
         .then(response => response.json())
         .then(runDataList => {
